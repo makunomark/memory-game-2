@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Memory Game</string>
+    <string name="dialog_awesome">Awesome!</string>
 </resources>

@@ -18,4 +18,8 @@ object Util {
     fun playSuccessSound(context: Context) {
         playSound(context, R.raw.success)
     }
+
+    fun playWinSound(context: Context) {
+        playSound(context, R.raw.win)
+    }
 }

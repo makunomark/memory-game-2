@@ -1,6 +1,7 @@
 package com.makuno.memory.commons
 
 import android.app.Activity
+import android.app.Dialog
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,11 @@ fun <T : View> Activity.bind(@IdRes idRes: Int): Lazy<T> {
 }
 
 fun <T : View> View.bind(@IdRes idRes: Int): Lazy<T> {
+    @Suppress("UNCHECKED_CAST")
+    return unsafeLazy { findViewById(idRes) as T }
+}
+
+fun <T : View> Dialog.bind(@IdRes idRes: Int): Lazy<T> {
     @Suppress("UNCHECKED_CAST")
     return unsafeLazy { findViewById(idRes) as T }
 }

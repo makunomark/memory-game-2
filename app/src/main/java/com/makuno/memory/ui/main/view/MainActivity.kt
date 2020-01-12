@@ -34,6 +34,7 @@ internal class MainActivity : AppCompatActivity() {
         mainViewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
 
         observeProducts()
+        observeScore()
         mainViewModel.getProducts()
     }
 
@@ -44,15 +45,19 @@ internal class MainActivity : AppCompatActivity() {
             })
     }
 
+    private fun observeScore() {
+        mainViewModel.pairsFound.observe(this, Observer {
+            if (it == ((mainViewModel.productsMutableLiveData.value?.size?.plus(1))?.div(2))) {
+                showGameOverSuccessDialog()
+            }
+        })
+    }
+
     private fun displayCards(list: List<Product>?) {
         if (list.isNullOrEmpty()) return
 
-        val mutableProductList = list.toMutableList()
-        mutableProductList.addAll(list)
-        mutableProductList.shuffle()
-
         rvCards.adapter = ProductAdapter(
-            mutableProductList.toList(),
+            list,
             object : ProductAdapter.OnCardFlippedListener {
                 override fun onCardFlipped(product: Product, easyFlipView: EasyFlipView) {
                     if (mainViewModel.firstProduct == null && mainViewModel.firstEasyFlipView == null) {
@@ -75,6 +80,7 @@ internal class MainActivity : AppCompatActivity() {
             mainViewModel.firstEasyFlipView = null
 
             Util.playSuccessSound(applicationContext)
+            mainViewModel.addOneToScore()
         } else if (mainViewModel.firstProduct != null && product != mainViewModel.firstProduct) {
             val initalFlipView = mainViewModel.firstEasyFlipView!!
 
@@ -91,5 +97,22 @@ internal class MainActivity : AppCompatActivity() {
         for (easyFlipView: EasyFlipView in easyFlipViews) {
             easyFlipView.flipTheView()
         }
+    }
+
+    private fun showGameOverSuccessDialog() {
+        val gameOverSuccessDialog = GameOverSuccessDialog(this)
+        gameOverSuccessDialog.show()
+
+        gameOverSuccessDialog.setGameOverSuccessDialogEventListener(object :
+            GameOverSuccessDialog.OnGameOverDialogEventListener {
+            override fun onRestart() {
+                mainViewModel.resetScore()
+                mainViewModel.getProducts()
+            }
+
+            override fun onScores() {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
     }
 }

@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:minWidth="100dp"
             android:minHeight="100dp"
-            android:src="@color/burnt_orange" />
+            android:src="@color/sky_blue" />
 
     </androidx.cardview.widget.CardView>
 </com.wajahatkarim3.easyflipview.EasyFlipView>

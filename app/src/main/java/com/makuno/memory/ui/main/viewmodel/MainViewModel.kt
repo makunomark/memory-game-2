@@ -18,9 +18,14 @@ internal class MainViewModel
 
     private var retryCount = 0
     val productsMutableLiveData = MutableLiveData<List<Product>?>()
+    val pairsFound = MutableLiveData<Int>()
 
     var firstProduct: Product? = null
     var firstEasyFlipView: EasyFlipView? = null
+
+    init {
+        pairsFound.postValue(0)
+    }
 
     fun getProducts() {
         viewModelScope.launch {
@@ -28,7 +33,7 @@ internal class MainViewModel
             if (products.isNullOrEmpty()) {
                 getRemoteProducts()
             } else {
-                productsMutableLiveData.value = products
+                productsMutableLiveData.postValue(prepareProductsForDisplay(products))
             }
         }
     }
@@ -56,5 +61,20 @@ internal class MainViewModel
                 retryCount += 1
             }
         }
+    }
+
+    private fun prepareProductsForDisplay(products: List<Product>): List<Product> {
+        val mutableProductList = products.toMutableList()
+        mutableProductList.addAll(products)
+        mutableProductList.shuffle()
+        return mutableProductList.toList()
+    }
+
+    fun addOneToScore() {
+        pairsFound.postValue(pairsFound.value?.plus(1))
+    }
+
+    fun resetScore() {
+        pairsFound.postValue(0)
     }
 }
