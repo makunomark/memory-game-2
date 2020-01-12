@@ -1,6 +1,6 @@
 package com.makuno.memory.di.modules
 
-import com.makuno.commons.Constants
+import com.makuno.memory.commons.Constants
 import com.makuno.memory.data.remote.api.ApplicationApi
 import dagger.Module
 import dagger.Provides

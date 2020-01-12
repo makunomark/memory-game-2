@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.wajahatkarim3.easyflipview.EasyFlipView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/easyFlipView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:autoFlipBack="false"
+    app:flipDuration="400"
+    app:flipEnabled="true"
+    app:flipFrom="right"
+    app:flipOnTouch="false"
+    app:flipType="horizontal">
+
+    <!-- Back Layout Goes Here -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        app:cardCornerRadius="4dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/productImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="100dp"
+            android:minHeight="100dp"
+            tools:src="@color/burnt_orange" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Front Layout Goes Here -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        app:cardCornerRadius="4dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/productImageBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="100dp"
+            android:minHeight="100dp"
+            android:src="@color/burnt_orange" />
+
+    </androidx.cardview.widget.CardView>
+</com.wajahatkarim3.easyflipview.EasyFlipView>

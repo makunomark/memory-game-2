@@ -1,7 +1,9 @@
 package com.makuno.memory.ui.main.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.makuno.memory.commons.Constants
 import com.makuno.memory.data.local.entities.Product
 import com.makuno.memory.data.models.Products
 import com.makuno.memory.data.repository.ProductRepository
@@ -13,12 +15,27 @@ internal class MainViewModel
     private val productRepository: ProductRepository
 ) : ViewModel() {
 
-    fun getRemoteCharacters() {
+    private var retryCount = 0
+    val productsMutableLiveData = MutableLiveData<List<Product>?>()
+
+    fun getProducts() {
+        viewModelScope.launch {
+            val products = productRepository.loadLocalProducts()
+            if (products.isNullOrEmpty()) {
+                getRemoteProducts()
+            } else {
+                productsMutableLiveData.value = products
+            }
+        }
+    }
+
+    private fun getRemoteProducts() {
         viewModelScope.launch {
             val remoteProducts = productRepository.loadRemoteProducts()
             saveProducts(remoteProducts.products)
         }
     }
+
 
     private fun saveProducts(results: List<Products>) {
         viewModelScope.launch {
@@ -27,8 +44,12 @@ internal class MainViewModel
                     result.id,
                     result.image.src
                 )
-
                 productRepository.saveProduct(product)
+            }
+
+            if (retryCount <= Constants.RETRY_TIMES) {
+                getProducts()
+                retryCount += 1
             }
         }
     }

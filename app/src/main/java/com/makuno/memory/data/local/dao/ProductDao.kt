@@ -7,6 +7,6 @@ import com.makuno.memory.data.local.entities.Product
 @Dao
 internal interface ProductDao : BaseDao<Product> {
 
-    @Query("SELECT * FROM product")
-    suspend fun getCharacters(): List<Product>
+    @Query("SELECT * FROM product ORDER BY RANDOM() LIMIT 10")
+    suspend fun getProducts(): List<Product>?
 }

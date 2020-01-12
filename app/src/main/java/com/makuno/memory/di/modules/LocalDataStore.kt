@@ -2,7 +2,7 @@ package com.makuno.memory.di.modules
 
 import android.app.Application
 import androidx.room.Room
-import com.makuno.commons.Constants
+import com.makuno.memory.commons.Constants
 import com.makuno.memory.data.local.ApplicationDatabase
 import com.makuno.memory.data.local.dao.ProductDao
 import com.makuno.memory.data.remote.api.ApplicationApi

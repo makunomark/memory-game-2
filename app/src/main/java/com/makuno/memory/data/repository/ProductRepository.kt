@@ -1,6 +1,6 @@
 package com.makuno.memory.data.repository
 
-import com.makuno.commons.Constants
+import com.makuno.memory.commons.Constants
 import com.makuno.memory.BuildConfig
 import com.makuno.memory.data.local.dao.ProductDao
 import com.makuno.memory.data.local.entities.Product
@@ -12,7 +12,7 @@ internal interface ProductRepository {
 
     suspend fun loadRemoteProducts(): ProductsResponse
 
-    suspend fun loadLocalProducts(): List<Product>
+    suspend fun loadLocalProducts(): List<Product>?
 
     suspend fun saveProduct(product: Product)
 }
@@ -30,8 +30,8 @@ internal class ProductRepositoryImpl
         )
     }
 
-    override suspend fun loadLocalProducts(): List<Product> {
-        return productDao.getCharacters()
+    override suspend fun loadLocalProducts(): List<Product>? {
+        return productDao.getProducts()
     }
 
     override suspend fun saveProduct(product: Product) {
