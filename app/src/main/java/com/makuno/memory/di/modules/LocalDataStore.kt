@@ -4,10 +4,10 @@ import android.app.Application
 import androidx.room.Room
 import com.makuno.commons.Constants
 import com.makuno.memory.data.local.ApplicationDatabase
-import com.makuno.memory.data.local.dao.CharacterDao
+import com.makuno.memory.data.local.dao.ProductDao
 import com.makuno.memory.data.remote.api.ApplicationApi
-import com.makuno.memory.data.repository.CharacterRepository
-import com.makuno.memory.data.repository.CharacterRepositoryImpl
+import com.makuno.memory.data.repository.ProductRepository
+import com.makuno.memory.data.repository.ProductRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -27,7 +27,7 @@ internal class LocalDataStore {
 
     @Singleton
     @Provides
-    fun provideScoreDao(database: ApplicationDatabase): CharacterDao {
+    fun provideScoreDao(database: ApplicationDatabase): ProductDao {
         return database.getScoreDao()
     }
 
@@ -35,8 +35,8 @@ internal class LocalDataStore {
     @Provides
     fun provideCharactersRepository(
         applicationApi: ApplicationApi,
-        characterDao: CharacterDao
-    ): CharacterRepository {
-        return CharacterRepositoryImpl(applicationApi, characterDao)
+        productDao: ProductDao
+    ): ProductRepository {
+        return ProductRepositoryImpl(applicationApi, productDao)
     }
 }

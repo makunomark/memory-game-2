@@ -5,8 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-internal data class Character(
-    @PrimaryKey @NonNull val id: Int,
-    val name: String,
-    val url: String
+internal data class Product(
+    @PrimaryKey @NonNull val id: Long,
+    val imageSrc: String
 )

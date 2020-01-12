@@ -14,8 +14,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class Location(
+data class ProductsResponse (
 
-    @SerializedName("name") val name: String,
-    @SerializedName("url") val url: String
+	@SerializedName("products") val products : List<Products>
 )

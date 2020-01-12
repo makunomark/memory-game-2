@@ -14,8 +14,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class CharacterResponse(
+data class Options (
 
-    @SerializedName("info") val info: Info,
-    @SerializedName("results") val results: List<Results>
+	@SerializedName("id") val id : Long,
+	@SerializedName("product_id") val productId : Long,
+	@SerializedName("name") val name : String,
+	@SerializedName("position") val position : Int,
+	@SerializedName("values") val values : List<String>
 )

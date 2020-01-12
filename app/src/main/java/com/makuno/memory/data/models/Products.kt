@@ -14,8 +14,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class Origin(
+data class Products (
 
-    @SerializedName("name") val name: String,
-    @SerializedName("url") val url: String
+	@SerializedName("id") val id : Long,
+	@SerializedName("title") val title : String,
+	@SerializedName("body_html") val bodyHtml : String,
+	@SerializedName("vendor") val vendor : String,
+	@SerializedName("product_type") val productType : String,
+	@SerializedName("created_at") val createdAt : String,
+	@SerializedName("handle") val handle : String,
+	@SerializedName("updated_at") val updatedAt : String,
+	@SerializedName("published_at") val publishedAt : String,
+	@SerializedName("template_suffix") val templateSuffix : String,
+	@SerializedName("published_scope") val publishedScope : String,
+	@SerializedName("tags") val tags : String,
+	@SerializedName("admin_graphql_api_id") val adminGraphqlApiId : String,
+	@SerializedName("variants") val variants : List<Variants>,
+	@SerializedName("options") val options : List<Options>,
+	@SerializedName("images") val images : List<Images>,
+	@SerializedName("image") val image : Image
 )

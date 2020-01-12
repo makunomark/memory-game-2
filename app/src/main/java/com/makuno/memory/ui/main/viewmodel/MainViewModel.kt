@@ -2,36 +2,33 @@ package com.makuno.memory.ui.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.makuno.memory.data.local.entities.Character
-import com.makuno.memory.data.models.Results
-import com.makuno.memory.data.repository.CharacterRepository
+import com.makuno.memory.data.local.entities.Product
+import com.makuno.memory.data.models.Products
+import com.makuno.memory.data.repository.ProductRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 internal class MainViewModel
 @Inject constructor(
-    private val characterRepository: CharacterRepository
+    private val productRepository: ProductRepository
 ) : ViewModel() {
 
     fun getRemoteCharacters() {
         viewModelScope.launch {
-            val (_, results) = characterRepository.loadRemoteCharacters()
-            if (!results.isNullOrEmpty()) {
-                saveCharacters(results)
-            }
+            val remoteProducts = productRepository.loadRemoteProducts()
+            saveProducts(remoteProducts.products)
         }
     }
 
-    private fun saveCharacters(results: List<Results>) {
+    private fun saveProducts(results: List<Products>) {
         viewModelScope.launch {
             for (result in results) {
-                val character = Character(
+                val product = Product(
                     result.id,
-                    result.name,
-                    result.url
+                    result.image.src
                 )
 
-                characterRepository.saveCharacter(character)
+                productRepository.saveProduct(product)
             }
         }
     }

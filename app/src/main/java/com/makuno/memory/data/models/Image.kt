@@ -14,10 +14,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class Info(
+data class Image(
 
-    @SerializedName("count") val count: Int,
-    @SerializedName("pages") val pages: Int,
-    @SerializedName("next") val next: String,
-    @SerializedName("prev") val prev: String
+    @SerializedName("id") val id: Long,
+    @SerializedName("product_id") val productId: Long,
+    @SerializedName("position") val position: Int,
+    @SerializedName("created_at") val createdAt: String,
+    @SerializedName("updated_at") val updatedAt: String,
+    @SerializedName("alt") val alt: String,
+    @SerializedName("width") val width: Int,
+    @SerializedName("height") val height: Int,
+    @SerializedName("src") val src: String,
+    @SerializedName("variant_ids") val variantIds: List<String>,
+    @SerializedName("admin_graphql_api_id") val adminGraphqlApiId: String
 )

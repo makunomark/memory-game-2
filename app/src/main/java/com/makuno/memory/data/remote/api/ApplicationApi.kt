@@ -1,11 +1,15 @@
 package com.makuno.memory.data.remote.api
 
-import com.makuno.memory.data.models.CharacterResponse
+import com.makuno.memory.data.models.ProductsResponse
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApplicationApi {
 
-    @GET("api/character/")
-    suspend fun getCharacters(): CharacterResponse
+    @GET("admin/products.json")
+    suspend fun getProducts(
+        @Query("page") page: Int,
+        @Query("access_token") accessToken: String
+    ): ProductsResponse
 
 }

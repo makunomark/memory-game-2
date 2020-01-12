@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">@color/dark_gray</color>
+    <color name="colorPrimaryDark">@color/dark_gray</color>
+    <color name="colorAccent">@color/tangerine</color>
+
+    <color name="primary_background">#191929</color>
+    <color name="secondary_background">#202032</color>
+    <color name="dark_gray">#0F0F19</color>
+    <color name="slate_gray">#5E5B54</color>
+    <color name="cloud_gray">#A1A7B1</color>
+
+    <color name="burnt_orange">#E43B24</color>
+    <color name="tangerine">#F39307</color>
+    <color name="sky_blue">#15A7E8</color>
+    <color name="sky_blue_light">#62CBEE</color>
 </resources>

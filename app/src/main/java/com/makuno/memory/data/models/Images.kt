@@ -14,17 +14,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class Results(
-    @SerializedName("id") val id: Int,
-    @SerializedName("name") val name: String,
-    @SerializedName("status") val status: String,
-    @SerializedName("species") val species: String,
-    @SerializedName("type") val type: String,
-    @SerializedName("gender") val gender: String,
-    @SerializedName("origin") val origin: Origin,
-    @SerializedName("location") val location: Location,
-    @SerializedName("image") val image: String,
-    @SerializedName("episode") val episode: List<String>,
-    @SerializedName("url") val url: String,
-    @SerializedName("created") val created: String
+data class Images (
+
+	@SerializedName("id") val id : Long,
+	@SerializedName("product_id") val productId : Long,
+	@SerializedName("position") val position : Int,
+	@SerializedName("created_at") val createdAt : String,
+	@SerializedName("updated_at") val updatedAt : String,
+	@SerializedName("alt") val alt : String,
+	@SerializedName("width") val width : Int,
+	@SerializedName("height") val height : Int,
+	@SerializedName("src") val src : String,
+	@SerializedName("variant_ids") val variantIds : List<String>,
+	@SerializedName("admin_graphql_api_id") val adminGraphqlApiId : String
 )

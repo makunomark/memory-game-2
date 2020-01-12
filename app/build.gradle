@@ -33,6 +33,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "SHOPIFY_ACCESS_TOKEN", "\"" + SHOPIFY_ACCESS_TOKEN + "\"")
+        }
+        debug {
+            buildConfigField("String", "SHOPIFY_ACCESS_TOKEN", "\"" + SHOPIFY_ACCESS_TOKEN + "\"")
         }
     }
 }
