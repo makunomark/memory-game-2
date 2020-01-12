@@ -2,6 +2,7 @@ package com.makuno.memory.ui.main.view
 
 import android.os.Bundle
 import android.os.Handler
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,7 +16,9 @@ import com.makuno.memory.ui.main.adapter.ProductAdapter
 import com.makuno.memory.ui.main.viewmodel.MainViewModel
 import com.wajahatkarim3.easyflipview.EasyFlipView
 import dagger.android.AndroidInjection
+import java.util.*
 import javax.inject.Inject
+
 
 internal class MainActivity : AppCompatActivity() {
 
@@ -25,6 +28,8 @@ internal class MainActivity : AppCompatActivity() {
     lateinit var mainViewModel: MainViewModel
 
     private val rvCards by bind<RecyclerView>(R.id.rvCards)
+    private val textViewMoves by bind<TextView>(R.id.textViewMoves)
+    private val textViewTimeElapsed by bind<TextView>(R.id.textViewTimeElapsed)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -35,6 +40,7 @@ internal class MainActivity : AppCompatActivity() {
 
         observeProducts()
         observeScore()
+        observeMoves()
         mainViewModel.getProducts()
     }
 
@@ -53,6 +59,24 @@ internal class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun observeMoves() {
+        mainViewModel.moves.observe(this, Observer {
+            textViewMoves.text = it.toString()
+            if (mainViewModel.moves.value == 1) {
+                mainViewModel.stopwatch.start()
+                startTimerWatcher()
+            }
+        })
+    }
+
+    private fun startTimerWatcher() {
+        Timer().scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                textViewTimeElapsed.text = Util.formatTime(mainViewModel.stopwatch.elapsedTimeSecs)
+            }
+        }, 0, 1000)
+    }
+
     private fun displayCards(list: List<Product>?) {
         if (list.isNullOrEmpty()) return
 
@@ -60,6 +84,7 @@ internal class MainActivity : AppCompatActivity() {
             list,
             object : ProductAdapter.OnCardFlippedListener {
                 override fun onCardFlipped(product: Product, easyFlipView: EasyFlipView) {
+                    mainViewModel.addOneToMove()
                     if (mainViewModel.firstProduct == null && mainViewModel.firstEasyFlipView == null) {
                         mainViewModel.firstProduct = product
                         mainViewModel.firstEasyFlipView = easyFlipView
@@ -111,7 +136,7 @@ internal class MainActivity : AppCompatActivity() {
             }
 
             override fun onScores() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
         })
     }

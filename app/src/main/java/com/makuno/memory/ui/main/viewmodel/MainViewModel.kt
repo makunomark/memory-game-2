@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.makuno.memory.commons.Constants
+import com.makuno.memory.commons.Stopwatch
 import com.makuno.memory.data.local.entities.Product
 import com.makuno.memory.data.models.Products
 import com.makuno.memory.data.repository.ProductRepository
@@ -17,14 +18,20 @@ internal class MainViewModel
 ) : ViewModel() {
 
     private var retryCount = 0
+
     val productsMutableLiveData = MutableLiveData<List<Product>?>()
     val pairsFound = MutableLiveData<Int>()
+    val moves = MutableLiveData<Int>()
 
+    var stopwatch: Stopwatch
     var firstProduct: Product? = null
     var firstEasyFlipView: EasyFlipView? = null
 
     init {
         pairsFound.postValue(0)
+        moves.postValue(0)
+
+        stopwatch = Stopwatch()
     }
 
     fun getProducts() {
@@ -72,6 +79,10 @@ internal class MainViewModel
 
     fun addOneToScore() {
         pairsFound.postValue(pairsFound.value?.plus(1))
+    }
+
+    fun addOneToMove() {
+        moves.postValue(moves.value?.plus(1))
     }
 
     fun resetScore() {
