@@ -1,7 +1,5 @@
 package com.makuno.memory.ui.main.adapter
 
-import android.animation.AnimatorInflater
-import android.animation.AnimatorSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,20 +12,25 @@ import com.makuno.memory.data.local.entities.Product
 import com.wajahatkarim3.easyflipview.EasyFlipView
 
 internal class ProductAdapter(
-    private val products: List<Product>
+    private val products: List<Product>,
+    private val onCardFlippedListener: OnCardFlippedListener
 ) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val productImage by bind<AppCompatImageView>(R.id.productImage, itemView)
         private val easyFlipView by bind<EasyFlipView>(R.id.easyFlipView, itemView)
 
-        fun bind(product: Product) {
+        fun bind(product: Product, onCardFlippedListener: OnCardFlippedListener) {
             Glide.with(itemView).load(product.imageSrc).into(productImage)
 
             easyFlipView.setOnClickListener {
-                easyFlipView.flipTheView()
+                if (!easyFlipView.isBackSide) {
+                    easyFlipView.flipTheView()
+                    onCardFlippedListener.onCardFlipped(product, easyFlipView)
+                }else{
+                    onCardFlippedListener.onCardCantFlip()
+                }
             }
-
         }
     }
 
@@ -46,6 +49,15 @@ internal class ProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(products[position])
+        holder.bind(products[position], onCardFlippedListener)
+    }
+
+    internal interface OnCardFlippedListener {
+        fun onCardFlipped(
+            product: Product,
+            easyFlipView: EasyFlipView
+        )
+
+        fun onCardCantFlip()
     }
 }

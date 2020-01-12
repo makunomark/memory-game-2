@@ -7,6 +7,7 @@ import com.makuno.memory.commons.Constants
 import com.makuno.memory.data.local.entities.Product
 import com.makuno.memory.data.models.Products
 import com.makuno.memory.data.repository.ProductRepository
+import com.wajahatkarim3.easyflipview.EasyFlipView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,6 +18,9 @@ internal class MainViewModel
 
     private var retryCount = 0
     val productsMutableLiveData = MutableLiveData<List<Product>?>()
+
+    var firstProduct: Product? = null
+    var firstEasyFlipView: EasyFlipView? = null
 
     fun getProducts() {
         viewModelScope.launch {
