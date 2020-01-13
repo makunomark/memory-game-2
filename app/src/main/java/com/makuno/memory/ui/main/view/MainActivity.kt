@@ -71,7 +71,7 @@ internal class MainActivity : AppCompatActivity() {
     }
 
     private fun startTimerWatcher() {
-        if (::timer.isInitialized) timer = Timer()
+        if (!::timer.isInitialized) timer = Timer()
 
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
@@ -129,6 +129,7 @@ internal class MainActivity : AppCompatActivity() {
 
     private fun showGameOverSuccessDialog() {
         mainViewModel.stopwatch.stop()
+        timer.cancel()
 
         val gameOverSuccessDialog = GameOverSuccessDialog(this)
         gameOverSuccessDialog.show()
