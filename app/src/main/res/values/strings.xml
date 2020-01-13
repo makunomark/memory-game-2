@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Memory Game</string>
+    <string name="app_name">Memori</string>
     <string name="dialog_awesome">Awesome!</string>
     <string name="time">Time:</string>
     <string name="moves">Moves:</string>
