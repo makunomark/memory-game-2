@@ -88,4 +88,12 @@ internal class MainViewModel
     fun resetScore() {
         pairsFound.postValue(0)
     }
+
+    fun resetMoves() {
+        moves.postValue(0)
+    }
+
+    fun resetTimer() {
+        stopwatch.reset()
+    }
 }

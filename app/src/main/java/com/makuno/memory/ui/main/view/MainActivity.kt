@@ -19,13 +19,13 @@ import dagger.android.AndroidInjection
 import java.util.*
 import javax.inject.Inject
 
-
 internal class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: DaggerViewModelFactory
 
     lateinit var mainViewModel: MainViewModel
+    lateinit var timer: Timer
 
     private val rvCards by bind<RecyclerView>(R.id.rvCards)
     private val textViewMoves by bind<TextView>(R.id.textViewMoves)
@@ -41,6 +41,7 @@ internal class MainActivity : AppCompatActivity() {
         observeProducts()
         observeScore()
         observeMoves()
+
         mainViewModel.getProducts()
     }
 
@@ -70,7 +71,9 @@ internal class MainActivity : AppCompatActivity() {
     }
 
     private fun startTimerWatcher() {
-        Timer().scheduleAtFixedRate(object : TimerTask() {
+        if (::timer.isInitialized) timer = Timer()
+
+        timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
                 textViewTimeElapsed.text = Util.formatTime(mainViewModel.stopwatch.elapsedTimeSecs)
             }
@@ -107,13 +110,13 @@ internal class MainActivity : AppCompatActivity() {
             Util.playSuccessSound(applicationContext)
             mainViewModel.addOneToScore()
         } else if (mainViewModel.firstProduct != null && product != mainViewModel.firstProduct) {
-            val initalFlipView = mainViewModel.firstEasyFlipView!!
+            val initialFlipView = mainViewModel.firstEasyFlipView!!
 
             mainViewModel.firstProduct = null
             mainViewModel.firstEasyFlipView = null
 
             Handler().postDelayed({
-                flipEasyViewCard(initalFlipView, easyFlipView)
+                flipEasyViewCard(initialFlipView, easyFlipView)
             }, 1200)
         }
     }
@@ -125,6 +128,8 @@ internal class MainActivity : AppCompatActivity() {
     }
 
     private fun showGameOverSuccessDialog() {
+        mainViewModel.stopwatch.stop()
+
         val gameOverSuccessDialog = GameOverSuccessDialog(this)
         gameOverSuccessDialog.show()
 
@@ -132,6 +137,8 @@ internal class MainActivity : AppCompatActivity() {
             GameOverSuccessDialog.OnGameOverDialogEventListener {
             override fun onRestart() {
                 mainViewModel.resetScore()
+                mainViewModel.resetMoves()
+                mainViewModel.resetTimer()
                 mainViewModel.getProducts()
             }
 

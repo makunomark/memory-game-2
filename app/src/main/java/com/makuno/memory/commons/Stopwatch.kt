@@ -30,6 +30,12 @@ class Stopwatch {
         running = false
     }
 
+    fun reset() {
+        if (running) this.stop()
+        this.startTime = 0
+        this.stopTime = 0
+    }
+
     val elapsedTime: Long
         get() = if (running) {
             System.currentTimeMillis() - startTime
