@@ -23,11 +23,17 @@ object Util {
         playSound(context, R.raw.win)
     }
 
-    fun formatTime(seconds: Long): String {
-        val hours = seconds / 3600;
-        val minutes = (seconds % 3600) / 60;
-        val seconds = seconds % 60;
+    fun formatTime(s: Long): String {
+        val hours = s / 3600
+        val minutes = (s % 3600) / 60
+        val seconds = s % 60
 
-        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        return if (hours == 0L && minutes != 0L) {
+            String.format("%02d:%02d", minutes, seconds)
+        } else if (hours == 0L && minutes == 0L) {
+            String.format("%02d", seconds)
+        } else {
+            String.format("%02d:%02d:%02d", hours, minutes, seconds)
+        }
     }
 }

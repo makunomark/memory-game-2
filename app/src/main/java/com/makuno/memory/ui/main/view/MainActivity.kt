@@ -30,6 +30,7 @@ internal class MainActivity : AppCompatActivity() {
     private val rvCards by bind<RecyclerView>(R.id.rvCards)
     private val textViewMoves by bind<TextView>(R.id.textViewMoves)
     private val textViewTimeElapsed by bind<TextView>(R.id.textViewTimeElapsed)
+    private val textViewPairs by bind<TextView>(R.id.textViewPairs)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -54,6 +55,7 @@ internal class MainActivity : AppCompatActivity() {
 
     private fun observeScore() {
         mainViewModel.pairsFound.observe(this, Observer {
+            textViewPairs.text = it.toString()
             if (it == ((mainViewModel.productsMutableLiveData.value?.size?.plus(1))?.div(2))) {
                 showGameOverSuccessDialog()
             }
@@ -75,7 +77,10 @@ internal class MainActivity : AppCompatActivity() {
 
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
-                textViewTimeElapsed.text = Util.formatTime(mainViewModel.stopwatch.elapsedTimeSecs)
+                runOnUiThread {
+                    textViewTimeElapsed.text =
+                        Util.formatTime(mainViewModel.stopwatch.elapsedTimeSecs)
+                }
             }
         }, 0, 1000)
     }
