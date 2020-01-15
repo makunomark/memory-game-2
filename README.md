@@ -7,3 +7,19 @@ SHOPIFY_ACCESS_TOKEN=access-token
 
 Mine is (c32313df0d0ef512ca64d5b336a0d7c6)
 
+### Features
+- 🚀Kotlin
+- 🚀MVVM Architecture (Android Jetpack)
+- 🚀Dagger Dependency Injection
+- 🚀Lifecycle Aware Components (Android Jetpack)
+- 🚀Persistence with Room (Android Jetpack)
+- 🚀AndroidX
+- 🚀Retrofit
+- 🚀Coroutines
+
+### ToDo
+- [ ] Screenshots
+- [ ] Setup guide
+- [ ] Documenation of implementation of various features
+- [ ] Unit Tests
+
