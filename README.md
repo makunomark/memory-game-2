@@ -9,6 +9,12 @@ Mine is (c32313df0d0ef512ca64d5b336a0d7c6)
 
 ### Screenshot(Pending)
 
+![Game start](screenshots/device-2020-01-17-165709.png)
+
+![Game start](screenshots/device-2020-01-17-165901.png)
+
+![Game start](screenshots/device-2020-01-17-165955.png)
+
 __Gameplay Video [link](https://drive.google.com/open?id=1FHhbpku_uYeCGVASQmNETYQ9D1UUE1_-)__
 
 ### Features
@@ -22,7 +28,7 @@ __Gameplay Video [link](https://drive.google.com/open?id=1FHhbpku_uYeCGVASQmNETY
 - 🚀Coroutines
 
 ### ToDo
-- [ ] Game win dialog update
+- [X] Game win dialog update
 - [ ] Score screen
 - [ ] Upload to play store
 - [ ] Setup guide

@@ -134,9 +134,13 @@ internal class MainActivity : AppCompatActivity() {
 
     private fun showGameOverSuccessDialog() {
         mainViewModel.stopwatch.stop()
-        timer.cancel()
+        if (::timer.isInitialized) timer.cancel()
 
-        val gameOverSuccessDialog = GameOverSuccessDialog(this)
+        val gameOverSuccessDialog = GameOverSuccessDialog(
+            this,
+            mainViewModel.moves.value ?: 0,
+            Util.formatTime(mainViewModel.stopwatch.elapsedTimeSecs)
+        )
         gameOverSuccessDialog.show()
 
         gameOverSuccessDialog.setGameOverSuccessDialogEventListener(object :
@@ -149,7 +153,10 @@ internal class MainActivity : AppCompatActivity() {
             }
 
             override fun onScores() {
-
+                mainViewModel.resetScore()
+                mainViewModel.resetMoves()
+                mainViewModel.resetTimer()
+                mainViewModel.getProducts()
             }
         })
     }
