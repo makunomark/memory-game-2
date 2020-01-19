@@ -9,10 +9,7 @@ Mine is (c32313df0d0ef512ca64d5b336a0d7c6)
 
 ### Screenshot
 
-<img src="screenshots/device-2020-01-19-111208.png" height="300">
-<img src="screenshots/device-2020-01-17-165709.png" height="300">
-<img src="screenshots/device-2020-01-17-165901.png" height="300">
-<img src="screenshots/device-2020-01-17-165955.png" height="300">
+<img src="screenshots/device-2020-01-19-111208.png" height="300"> <img src="screenshots/device-2020-01-17-165709.png" height="300"> <img src="screenshots/device-2020-01-17-165901.png" height="300"> <img src="screenshots/device-2020-01-17-165955.png" height="300">
 
 __Gameplay Video [link](https://drive.google.com/open?id=1FHhbpku_uYeCGVASQmNETYQ9D1UUE1_-)__
 
