@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.makuno.memory.commons.Constants
 import com.makuno.memory.commons.Stopwatch
 import com.makuno.memory.data.local.entities.Product
+import com.makuno.memory.data.local.entities.Score
 import com.makuno.memory.data.models.Products
 import com.makuno.memory.data.repository.ProductRepository
 import com.wajahatkarim3.easyflipview.EasyFlipView
@@ -95,5 +96,23 @@ internal class MainViewModel
 
     fun resetTimer() {
         stopwatch.reset()
+    }
+
+    fun endGame() {
+        val score = Score(
+            stopwatch.elapsedTimeSecs,
+            moves.value ?: 0
+        )
+        saveScore(score)
+
+        resetMoves()
+        resetMoves()
+        resetTimer()
+    }
+
+    fun saveScore(score: Score) {
+        viewModelScope.launch {
+            productRepository.saveScore(score)
+        }
     }
 }

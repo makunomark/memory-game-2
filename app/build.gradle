@@ -11,7 +11,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.android_project_template"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -48,6 +48,7 @@ ext {
     room_version = '2.1.0-alpha04'
     retrofit = '2.7.1'
     recyclerview_version = '1.1.0'
+    lottie_version = '3.3.1'
 }
 
 dependencies {
@@ -60,6 +61,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation 'com.wajahatkarim3.EasyFlipView:EasyFlipView:2.1.2'
@@ -85,6 +87,9 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+
+    //Lottie
+    implementation "com.airbnb.android:lottie:$lottie_version"
 
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 

@@ -35,7 +35,7 @@
                     android:textAllCaps="true"
                     android:textColor="@android:color/white"
                     android:textSize="24sp"
-                    app:fontFamily="@font/nunito_bold" />
+                    app:fontFamily="@font/robotic_monkey" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                     android:textAllCaps="true"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
-                    app:fontFamily="@font/nunito" />
+                    app:fontFamily="@font/robotic_monkey" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                             android:gravity="center"
                             android:text="@string/time"
                             android:textColor="@android:color/white"
-                            app:fontFamily="@font/nunito" />
+                            app:fontFamily="@font/robotic_monkey" />
 
                         <TextView
                             android:id="@+id/textViewTimeElapsed"
@@ -74,7 +74,7 @@
                             android:gravity="center"
                             android:textColor="@android:color/white"
                             android:textSize="26sp"
-                            app:fontFamily="@font/nunito_bold"
+                            app:fontFamily="@font/robotic_monkey"
                             tools:text="01:40" />
                     </LinearLayout>
 
@@ -91,7 +91,7 @@
                             android:gravity="center"
                             android:text="@string/moves"
                             android:textColor="@android:color/white"
-                            app:fontFamily="@font/nunito" />
+                            app:fontFamily="@font/robotic_monkey" />
 
                         <TextView
                             android:id="@+id/textViewMoves"
@@ -100,7 +100,7 @@
                             android:gravity="center"
                             android:textColor="@android:color/white"
                             android:textSize="26sp"
-                            app:fontFamily="@font/nunito_bold"
+                            app:fontFamily="@font/robotic_monkey"
                             tools:text="120" />
                     </LinearLayout>
                 </LinearLayout>
@@ -117,7 +117,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         android:text="restart"
-                        app:fontFamily="@font/nunito_bold" />
+                        app:fontFamily="@font/robotic_monkey" />
 
                     <Button
                         android:id="@+id/btnScores"
@@ -125,7 +125,7 @@
                         android:layout_height="50dp"
                         android:layout_weight="1"
                         android:text="scores"
-                        app:fontFamily="@font/nunito_bold" />
+                        app:fontFamily="@font/robotic_monkey" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.makuno.memory.commons.Constants
 import com.makuno.memory.data.local.ApplicationDatabase
 import com.makuno.memory.data.local.dao.ProductDao
+import com.makuno.memory.data.local.dao.ScoreDao
 import com.makuno.memory.data.remote.api.ApplicationApi
 import com.makuno.memory.data.repository.ProductRepository
 import com.makuno.memory.data.repository.ProductRepositoryImpl
@@ -25,9 +26,16 @@ internal class LocalDataStore {
         ).build()
     }
 
+
     @Singleton
     @Provides
-    fun provideScoreDao(database: ApplicationDatabase): ProductDao {
+    fun provideProductDao(database: ApplicationDatabase): ProductDao {
+        return database.getProductDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideScoreDao(database: ApplicationDatabase): ScoreDao {
         return database.getScoreDao()
     }
 
@@ -35,8 +43,9 @@ internal class LocalDataStore {
     @Provides
     fun provideCharactersRepository(
         applicationApi: ApplicationApi,
-        productDao: ProductDao
+        productDao: ProductDao,
+        scoreDao: ScoreDao
     ): ProductRepository {
-        return ProductRepositoryImpl(applicationApi, productDao)
+        return ProductRepositoryImpl(applicationApi, productDao, scoreDao)
     }
 }

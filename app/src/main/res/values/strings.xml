@@ -5,4 +5,11 @@
     <string name="time">Time:</string>
     <string name="moves">Moves:</string>
     <string name="empty_value">---</string>
+
+    <string name="title_activity_entry_screen">Memori</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="start_game">Start Game</string>
+    <string name="scores">Scores</string>
+    <string name="made_with">Made with ❤️</string>
 </resources>

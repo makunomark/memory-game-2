@@ -78,11 +78,14 @@ internal class MainActivity : AppCompatActivity() {
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
                 runOnUiThread {
-                    textViewTimeElapsed.text =
-                        Util.formatTime(mainViewModel.stopwatch.elapsedTimeSecs)
+                    updateTimeTextView()
                 }
             }
         }, 0, 1000)
+    }
+
+    private fun updateTimeTextView() {
+        textViewTimeElapsed.text = Util.formatTime(mainViewModel.stopwatch.elapsedTimeSecs)
     }
 
     private fun displayCards(list: List<Product>?) {
@@ -146,17 +149,14 @@ internal class MainActivity : AppCompatActivity() {
         gameOverSuccessDialog.setGameOverSuccessDialogEventListener(object :
             GameOverSuccessDialog.OnGameOverDialogEventListener {
             override fun onRestart() {
-                mainViewModel.resetScore()
-                mainViewModel.resetMoves()
-                mainViewModel.resetTimer()
+                mainViewModel.endGame()
+                updateTimeTextView()
                 mainViewModel.getProducts()
             }
 
             override fun onScores() {
-                mainViewModel.resetScore()
-                mainViewModel.resetMoves()
-                mainViewModel.resetTimer()
-                mainViewModel.getProducts()
+                mainViewModel.endGame()
+                updateTimeTextView()
             }
         })
     }
