@@ -7,7 +7,7 @@ SHOPIFY_ACCESS_TOKEN=access-token
 
 Mine is (c32313df0d0ef512ca64d5b336a0d7c6)
 
-### Screenshot
+### Screenshots
 
 <img src="screenshots/device-2020-01-19-111208.png" height="300"> <img src="screenshots/device-2020-01-17-165709.png" height="300"> <img src="screenshots/device-2020-01-17-165901.png" height="300"> <img src="screenshots/device-2020-01-17-165955.png" height="300">
 
