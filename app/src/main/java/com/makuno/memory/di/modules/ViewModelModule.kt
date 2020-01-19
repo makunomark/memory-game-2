@@ -2,7 +2,7 @@ package com.makuno.memory.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.makuno.memory.di.annotation.ViewModelKey
-import com.makuno.memory.ui.main.viewmodel.MainViewModel
+import com.makuno.memory.ui.game.viewmodel.GameViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -12,6 +12,6 @@ internal abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(selectOrderViewModel: MainViewModel): ViewModel
+    @ViewModelKey(GameViewModel::class)
+    abstract fun bindMainViewModel(selectOrderViewModel: GameViewModel): ViewModel
 }

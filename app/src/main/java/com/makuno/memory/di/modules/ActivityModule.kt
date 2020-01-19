@@ -1,7 +1,7 @@
 package com.makuno.memory.di.modules
 
 import com.makuno.memory.di.annotation.ActivityScope
-import com.makuno.memory.ui.main.view.MainActivity
+import com.makuno.memory.ui.game.view.GameActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -11,5 +11,5 @@ internal interface ActivityModule {
 
     @ActivityScope
     @ContributesAndroidInjector
-    fun provideMainActivity(): MainActivity
+    fun provideMainActivity(): GameActivity
 }

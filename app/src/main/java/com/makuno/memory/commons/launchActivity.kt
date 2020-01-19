@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import com.makuno.memory.R
 
 /**
  * Extensions for simpler launching of Activities

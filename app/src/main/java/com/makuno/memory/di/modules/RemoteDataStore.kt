@@ -1,7 +1,7 @@
 package com.makuno.memory.di.modules
 
 import com.makuno.memory.commons.Constants
-import com.makuno.memory.data.remote.api.ApplicationApi
+import com.makuno.memory.data.remote.api.GameApplicationApi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -23,7 +23,7 @@ class RemoteDataStore {
 
     @Singleton
     @Provides
-    fun provideApplicationApi(retrofit: Retrofit): ApplicationApi {
-        return retrofit.create(ApplicationApi::class.java)
+    fun provideApplicationApi(retrofit: Retrofit): GameApplicationApi {
+        return retrofit.create(GameApplicationApi::class.java)
     }
 }

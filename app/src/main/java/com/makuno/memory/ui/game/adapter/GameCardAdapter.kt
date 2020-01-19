@@ -1,4 +1,4 @@
-package com.makuno.memory.ui.main.adapter
+package com.makuno.memory.ui.game.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,25 +8,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.makuno.memory.R
 import com.makuno.memory.commons.bind
-import com.makuno.memory.data.local.entities.Product
+import com.makuno.memory.data.local.entities.GameCard
 import com.wajahatkarim3.easyflipview.EasyFlipView
 
-internal class ProductAdapter(
-    private val products: List<Product>,
+internal class GameCardAdapter(
+    private val gameCards: List<GameCard>,
     private val onCardFlippedListener: OnCardFlippedListener
-) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<GameCardAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val productImage by bind<AppCompatImageView>(R.id.productImage, itemView)
         private val easyFlipView by bind<EasyFlipView>(R.id.easyFlipView, itemView)
 
-        fun bind(product: Product, onCardFlippedListener: OnCardFlippedListener) {
-            Glide.with(itemView).load(product.imageSrc).into(productImage)
+        fun bind(gameCard: GameCard, onCardFlippedListener: OnCardFlippedListener) {
+            Glide.with(itemView).load(gameCard.imageSrc).into(productImage)
 
             easyFlipView.setOnClickListener {
                 if (!easyFlipView.isBackSide) {
                     easyFlipView.flipTheView()
-                    onCardFlippedListener.onCardFlipped(product, easyFlipView)
+                    onCardFlippedListener.onCardFlipped(gameCard, easyFlipView)
                 }else{
                     onCardFlippedListener.onCardCantFlip()
                 }
@@ -45,16 +45,16 @@ internal class ProductAdapter(
     }
 
     override fun getItemCount(): Int {
-        return products.size
+        return gameCards.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(products[position], onCardFlippedListener)
+        holder.bind(gameCards[position], onCardFlippedListener)
     }
 
     internal interface OnCardFlippedListener {
         fun onCardFlipped(
-            product: Product,
+            gameCard: GameCard,
             easyFlipView: EasyFlipView
         )
 

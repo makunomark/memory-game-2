@@ -4,7 +4,7 @@ import com.makuno.memory.data.models.ProductsResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface ApplicationApi {
+interface GameApplicationApi {
 
     @GET("admin/products.json")
     suspend fun getProducts(

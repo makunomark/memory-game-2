@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/primary_background"
     android:orientation="vertical"
-    tools:context=".ui.main.view.MainActivity">
+    tools:context=".ui.game.view.GameActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"

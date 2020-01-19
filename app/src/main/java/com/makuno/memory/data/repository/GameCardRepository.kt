@@ -2,21 +2,21 @@ package com.makuno.memory.data.repository
 
 import com.makuno.memory.commons.Constants
 import com.makuno.memory.BuildConfig
-import com.makuno.memory.data.local.dao.ProductDao
+import com.makuno.memory.data.local.dao.GameCardDao
 import com.makuno.memory.data.local.dao.ScoreDao
-import com.makuno.memory.data.local.entities.Product
+import com.makuno.memory.data.local.entities.GameCard
 import com.makuno.memory.data.local.entities.Score
 import com.makuno.memory.data.models.ProductsResponse
-import com.makuno.memory.data.remote.api.ApplicationApi
+import com.makuno.memory.data.remote.api.GameApplicationApi
 import javax.inject.Inject
 
 internal interface ProductRepository {
 
     suspend fun loadRemoteProducts(): ProductsResponse
 
-    suspend fun loadLocalProducts(): List<Product>?
+    suspend fun loadLocalProducts(): List<GameCard>?
 
-    suspend fun saveProduct(product: Product)
+    suspend fun saveProduct(gameCard: GameCard)
 
     suspend fun saveScore(score: Score)
 
@@ -27,24 +27,24 @@ internal interface ProductRepository {
 
 internal class ProductRepositoryImpl
 @Inject constructor(
-    private val applicationApi: ApplicationApi,
-    private val productDao: ProductDao,
+    private val gameApplicationApi: GameApplicationApi,
+    private val gameCardDao: GameCardDao,
     private val scoreDao: ScoreDao
 ) : ProductRepository {
 
     override suspend fun loadRemoteProducts(): ProductsResponse {
-        return applicationApi.getProducts(
+        return gameApplicationApi.getProducts(
             Constants.SHOPIFY_PAGE,
             BuildConfig.SHOPIFY_ACCESS_TOKEN
         )
     }
 
-    override suspend fun loadLocalProducts(): List<Product>? {
-        return productDao.getProducts()
+    override suspend fun loadLocalProducts(): List<GameCard>? {
+        return gameCardDao.getProducts()
     }
 
-    override suspend fun saveProduct(product: Product) {
-        productDao.insert(product)
+    override suspend fun saveProduct(gameCard: GameCard) {
+        gameCardDao.insert(gameCard)
     }
 
     override suspend fun saveScore(score: Score) {

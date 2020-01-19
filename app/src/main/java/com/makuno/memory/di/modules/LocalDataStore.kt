@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.room.Room
 import com.makuno.memory.commons.Constants
 import com.makuno.memory.data.local.ApplicationDatabase
-import com.makuno.memory.data.local.dao.ProductDao
+import com.makuno.memory.data.local.dao.GameCardDao
 import com.makuno.memory.data.local.dao.ScoreDao
-import com.makuno.memory.data.remote.api.ApplicationApi
+import com.makuno.memory.data.remote.api.GameApplicationApi
 import com.makuno.memory.data.repository.ProductRepository
 import com.makuno.memory.data.repository.ProductRepositoryImpl
 import dagger.Module
@@ -29,7 +29,7 @@ internal class LocalDataStore {
 
     @Singleton
     @Provides
-    fun provideProductDao(database: ApplicationDatabase): ProductDao {
+    fun provideProductDao(database: ApplicationDatabase): GameCardDao {
         return database.getProductDao()
     }
 
@@ -42,10 +42,10 @@ internal class LocalDataStore {
     @Singleton
     @Provides
     fun provideCharactersRepository(
-        applicationApi: ApplicationApi,
-        productDao: ProductDao,
+        gameApplicationApi: GameApplicationApi,
+        gameCardDao: GameCardDao,
         scoreDao: ScoreDao
     ): ProductRepository {
-        return ProductRepositoryImpl(applicationApi, productDao, scoreDao)
+        return ProductRepositoryImpl(gameApplicationApi, gameCardDao, scoreDao)
     }
 }

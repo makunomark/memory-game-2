@@ -1,4 +1,4 @@
-package com.makuno.memory.ui.main.view
+package com.makuno.memory.ui.game.view
 
 import android.os.Bundle
 import android.os.Handler
@@ -10,21 +10,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.makuno.memory.R
 import com.makuno.memory.commons.Util
 import com.makuno.memory.commons.bind
-import com.makuno.memory.data.local.entities.Product
+import com.makuno.memory.data.local.entities.GameCard
 import com.makuno.memory.di.util.DaggerViewModelFactory
-import com.makuno.memory.ui.main.adapter.ProductAdapter
-import com.makuno.memory.ui.main.viewmodel.MainViewModel
+import com.makuno.memory.ui.game.adapter.GameCardAdapter
+import com.makuno.memory.ui.game.viewmodel.GameViewModel
 import com.wajahatkarim3.easyflipview.EasyFlipView
 import dagger.android.AndroidInjection
 import java.util.*
 import javax.inject.Inject
 
-internal class MainActivity : AppCompatActivity() {
+internal class GameActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: DaggerViewModelFactory
 
-    lateinit var mainViewModel: MainViewModel
+    lateinit var gameViewModel: GameViewModel
     lateinit var timer: Timer
 
     private val rvCards by bind<RecyclerView>(R.id.rvCards)
@@ -35,38 +35,38 @@ internal class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_game)
 
-        mainViewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+        gameViewModel = ViewModelProviders.of(this, viewModelFactory).get(GameViewModel::class.java)
 
         observeProducts()
         observeScore()
         observeMoves()
 
-        mainViewModel.getProducts()
+        gameViewModel.getProducts()
     }
 
     private fun observeProducts() {
-        mainViewModel.productsMutableLiveData.observe(this,
+        gameViewModel.productsMutableLiveData.observe(this,
             Observer {
                 displayCards(it)
             })
     }
 
     private fun observeScore() {
-        mainViewModel.pairsFound.observe(this, Observer {
+        gameViewModel.pairsFound.observe(this, Observer {
             textViewPairs.text = it.toString()
-            if (it == ((mainViewModel.productsMutableLiveData.value?.size?.plus(1))?.div(2))) {
+            if (it == ((gameViewModel.productsMutableLiveData.value?.size?.plus(1))?.div(2))) {
                 showGameOverSuccessDialog()
             }
         })
     }
 
     private fun observeMoves() {
-        mainViewModel.moves.observe(this, Observer {
+        gameViewModel.moves.observe(this, Observer {
             textViewMoves.text = it.toString()
-            if (mainViewModel.moves.value == 1) {
-                mainViewModel.stopwatch.start()
+            if (gameViewModel.moves.value == 1) {
+                gameViewModel.stopwatch.start()
                 startTimerWatcher()
             }
         })
@@ -85,22 +85,22 @@ internal class MainActivity : AppCompatActivity() {
     }
 
     private fun updateTimeTextView() {
-        textViewTimeElapsed.text = Util.formatTime(mainViewModel.stopwatch.elapsedTimeSecs)
+        textViewTimeElapsed.text = Util.formatTime(gameViewModel.stopwatch.elapsedTimeSecs)
     }
 
-    private fun displayCards(list: List<Product>?) {
+    private fun displayCards(list: List<GameCard>?) {
         if (list.isNullOrEmpty()) return
 
-        rvCards.adapter = ProductAdapter(
+        rvCards.adapter = GameCardAdapter(
             list,
-            object : ProductAdapter.OnCardFlippedListener {
-                override fun onCardFlipped(product: Product, easyFlipView: EasyFlipView) {
-                    mainViewModel.addOneToMove()
-                    if (mainViewModel.firstProduct == null && mainViewModel.firstEasyFlipView == null) {
-                        mainViewModel.firstProduct = product
-                        mainViewModel.firstEasyFlipView = easyFlipView
+            object : GameCardAdapter.OnCardFlippedListener {
+                override fun onCardFlipped(gameCard: GameCard, easyFlipView: EasyFlipView) {
+                    gameViewModel.addOneToMove()
+                    if (gameViewModel.firstGameCard == null && gameViewModel.firstEasyFlipView == null) {
+                        gameViewModel.firstGameCard = gameCard
+                        gameViewModel.firstEasyFlipView = easyFlipView
                     } else {
-                        compareProducts(product, easyFlipView)
+                        compareProducts(gameCard, easyFlipView)
                     }
                 }
 
@@ -110,18 +110,18 @@ internal class MainActivity : AppCompatActivity() {
             })
     }
 
-    private fun compareProducts(product: Product, easyFlipView: EasyFlipView) {
-        if (mainViewModel.firstProduct != null && product == mainViewModel.firstProduct) {
-            mainViewModel.firstProduct = null
-            mainViewModel.firstEasyFlipView = null
+    private fun compareProducts(gameCard: GameCard, easyFlipView: EasyFlipView) {
+        if (gameViewModel.firstGameCard != null && gameCard == gameViewModel.firstGameCard) {
+            gameViewModel.firstGameCard = null
+            gameViewModel.firstEasyFlipView = null
 
             Util.playSuccessSound(applicationContext)
-            mainViewModel.addOneToScore()
-        } else if (mainViewModel.firstProduct != null && product != mainViewModel.firstProduct) {
-            val initialFlipView = mainViewModel.firstEasyFlipView!!
+            gameViewModel.addOneToScore()
+        } else if (gameViewModel.firstGameCard != null && gameCard != gameViewModel.firstGameCard) {
+            val initialFlipView = gameViewModel.firstEasyFlipView!!
 
-            mainViewModel.firstProduct = null
-            mainViewModel.firstEasyFlipView = null
+            gameViewModel.firstGameCard = null
+            gameViewModel.firstEasyFlipView = null
 
             Handler().postDelayed({
                 flipEasyViewCard(initialFlipView, easyFlipView)
@@ -136,26 +136,26 @@ internal class MainActivity : AppCompatActivity() {
     }
 
     private fun showGameOverSuccessDialog() {
-        mainViewModel.stopwatch.stop()
+        gameViewModel.stopwatch.stop()
         if (::timer.isInitialized) timer.cancel()
 
-        val gameOverSuccessDialog = GameOverSuccessDialog(
+        val gameOverSuccessDialog = GameOverDialog(
             this,
-            mainViewModel.moves.value ?: 0,
-            Util.formatTime(mainViewModel.stopwatch.elapsedTimeSecs)
+            gameViewModel.moves.value ?: 0,
+            Util.formatTime(gameViewModel.stopwatch.elapsedTimeSecs)
         )
         gameOverSuccessDialog.show()
 
         gameOverSuccessDialog.setGameOverSuccessDialogEventListener(object :
-            GameOverSuccessDialog.OnGameOverDialogEventListener {
+            GameOverDialog.OnGameOverDialogEventListener {
             override fun onRestart() {
-                mainViewModel.endGame()
+                gameViewModel.endGame()
                 updateTimeTextView()
-                mainViewModel.getProducts()
+                gameViewModel.getProducts()
             }
 
             override fun onScores() {
-                mainViewModel.endGame()
+                gameViewModel.endGame()
                 updateTimeTextView()
             }
         })

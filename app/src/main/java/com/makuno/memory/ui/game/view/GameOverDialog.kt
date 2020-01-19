@@ -1,4 +1,4 @@
-package com.makuno.memory.ui.main.view
+package com.makuno.memory.ui.game.view
 
 import android.app.Dialog
 import android.content.Context
@@ -16,13 +16,13 @@ import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
 
 
-internal class GameOverSuccessDialog(
+internal class GameOverDialog(
     context: Context,
     private val moves: Int,
     private val time: String
 ) : Dialog(context) {
 
-    private val kofettiView by bind<KonfettiView>(R.id.kofettiView)
+    private val konfettiView by bind<KonfettiView>(R.id.kofettiView)
     private val btnRestart by bind<Button>(R.id.btnRestart)
     private val btnScores by bind<Button>(R.id.btnScores)
     private val textViewTimeElapsed by bind<TextView>(R.id.textViewTimeElapsed)
@@ -34,7 +34,7 @@ internal class GameOverSuccessDialog(
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.dialog_game_over_success)
+        setContentView(R.layout.dialog_game_over)
 
         setCancelable(false)
 
@@ -43,7 +43,7 @@ internal class GameOverSuccessDialog(
         textViewTimeElapsed.text = time
         textViewMoves.text = moves.toString()
 
-        kofettiView.build()
+        konfettiView.build()
             .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
             .setDirection(0.0, 359.0)
             .setSpeed(1f, 5f)
@@ -52,7 +52,7 @@ internal class GameOverSuccessDialog(
             .addShapes(Shape.RECT, Shape.CIRCLE)
             .addSizes(Size(12))
             .setPosition(
-                -50f, kofettiView.width + 50f, -50f, -50f
+                -50f, konfettiView.width + 50f, -50f, -50f
             )
             .streamFor(100, 1200L)
 

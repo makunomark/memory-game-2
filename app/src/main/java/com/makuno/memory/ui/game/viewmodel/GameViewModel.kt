@@ -1,11 +1,11 @@
-package com.makuno.memory.ui.main.viewmodel
+package com.makuno.memory.ui.game.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.makuno.memory.commons.Constants
 import com.makuno.memory.commons.Stopwatch
-import com.makuno.memory.data.local.entities.Product
+import com.makuno.memory.data.local.entities.GameCard
 import com.makuno.memory.data.local.entities.Score
 import com.makuno.memory.data.models.Products
 import com.makuno.memory.data.repository.ProductRepository
@@ -13,19 +13,19 @@ import com.wajahatkarim3.easyflipview.EasyFlipView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-internal class MainViewModel
+internal class GameViewModel
 @Inject constructor(
     private val productRepository: ProductRepository
 ) : ViewModel() {
 
     private var retryCount = 0
 
-    val productsMutableLiveData = MutableLiveData<List<Product>?>()
+    val productsMutableLiveData = MutableLiveData<List<GameCard>?>()
     val pairsFound = MutableLiveData<Int>()
     val moves = MutableLiveData<Int>()
 
     var stopwatch: Stopwatch
-    var firstProduct: Product? = null
+    var firstGameCard: GameCard? = null
     var firstEasyFlipView: EasyFlipView? = null
 
     init {
@@ -57,7 +57,7 @@ internal class MainViewModel
     private fun saveProducts(results: List<Products>) {
         viewModelScope.launch {
             for (result in results) {
-                val product = Product(
+                val product = GameCard(
                     result.id,
                     result.image.src
                 )
@@ -71,9 +71,9 @@ internal class MainViewModel
         }
     }
 
-    private fun prepareProductsForDisplay(products: List<Product>): List<Product> {
-        val mutableProductList = products.toMutableList()
-        mutableProductList.addAll(products)
+    private fun prepareProductsForDisplay(gameCards: List<GameCard>): List<GameCard> {
+        val mutableProductList = gameCards.toMutableList()
+        mutableProductList.addAll(gameCards)
         mutableProductList.shuffle()
         return mutableProductList.toList()
     }

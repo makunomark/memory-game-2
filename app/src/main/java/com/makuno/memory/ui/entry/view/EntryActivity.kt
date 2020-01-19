@@ -1,4 +1,4 @@
-package com.makuno.memory.ui.main
+package com.makuno.memory.ui.entry.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,14 +6,14 @@ import android.os.Handler
 import android.view.View
 import com.makuno.memory.R
 import com.makuno.memory.commons.launchActivity
-import com.makuno.memory.ui.main.view.MainActivity
+import com.makuno.memory.ui.game.view.GameActivity
 import kotlinx.android.synthetic.main.activity_entry_screen.*
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-class EntryScreen : AppCompatActivity() {
+class EntryActivity : AppCompatActivity() {
     private val mHideHandler = Handler()
     private val mHidePart2Runnable = Runnable {
         // Delayed removal of status and navigation bar
@@ -57,7 +57,7 @@ class EntryScreen : AppCompatActivity() {
         fullscreen_content.setOnClickListener { toggle() }
 
         btnStartGame.setOnClickListener {
-            launchActivity<MainActivity>()
+            launchActivity<GameActivity>()
         }
     }
 

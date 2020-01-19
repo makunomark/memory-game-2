@@ -1,7 +1,7 @@
 package com.makuno.memory.di
 
 import android.app.Application
-import com.makuno.memory.TemplateApplication
+import com.makuno.memory.GameApplication
 import com.makuno.memory.di.modules.*
 import dagger.BindsInstance
 import dagger.Component
@@ -21,7 +21,7 @@ import javax.inject.Singleton
 )
 internal interface ApplicationComponent {
 
-    fun inject(application: TemplateApplication)
+    fun inject(application: GameApplication)
 
     @Component.Builder
     interface Builder {
