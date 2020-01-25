@@ -59,6 +59,8 @@ class EntryActivity : AppCompatActivity() {
         btnStartGame.setOnClickListener {
             launchActivity<GameActivity>()
         }
+
+        btnScores.visibility = View.GONE
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
