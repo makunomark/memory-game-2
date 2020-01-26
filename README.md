@@ -1,4 +1,9 @@
+
 ## Memory Game || 🛠️WORK-IN-PROGRESS 👨‍💻 ||
+
+<a href="https://play.google.com/store/apps/details?id=com.makuno.memory">
+    <img src="./images/play-store.svg" alt="link to playstore" height="170">
+</a>
 
 ### Access Tokens
 Access tokens are brought in at build time via gradle.properties file. Copy the last part of the provided url. Then place this key in your machine's ~/.gradle/gradle.properties file:
@@ -39,7 +44,7 @@ This is the part where I shout out libraries that made this work easier
 ### ToDo
 - [X] Game win dialog update
 - [ ] Score screen
-- [ ] Upload to play store
+- [X] Upload to play store
 - [ ] Setup guide
 - [ ] Documentation of implementation of various features
 - [ ] Unit Tests
