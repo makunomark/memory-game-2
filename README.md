@@ -2,7 +2,7 @@
 ## Memory Game || 🛠️WORK-IN-PROGRESS 👨‍💻 ||
 
 <a href="https://play.google.com/store/apps/details?id=com.makuno.memory">
-    <img src="./images/play-store.svg" alt="link to playstore" height="170">
+    <img src="./images/play-store.svg" alt="link to playstore" height="100">
 </a>
 
 ### Access Tokens
