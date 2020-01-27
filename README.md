@@ -42,12 +42,14 @@ This is the part where I shout out libraries that made this work easier
 - Icons made by [**Darius Dan**](https://www.flaticon.com/authors/darius-dan) from [Flaticon](https://www.flaticon.com/) [(Link)](https://www.flaticon.com/free-icon/memory_2219225?term=memory&page=1&position=46) 
 
 ### ToDo
-- [X] Game win dialog update
-- [ ] Score screen
 - [X] Upload to play store
-- [ ] Setup guide
-- [ ] Documentation of implementation of various features
-- [ ] Unit Tests
-- [X] Third party libraries
+- [X] Game win dialog update
+- [X] Attributes for third party libraries
 - [X] Screenshots
+- [ ] Yet another dialog update
+- [ ] Score screen
+- [ ] Circle CI for tests & automated deployments to play store
+- [ ] Unit Tests
+- [ ] Local setup guide
+- [ ] Documentation of implementation of various features
 
