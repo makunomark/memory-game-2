@@ -11,7 +11,7 @@ import com.makuno.memory.data.local.util.Converters
 
 @Database(entities = [GameCard::class, Score::class], version = 4, exportSchema = false)
 @TypeConverters(Converters::class)
-internal abstract class ApplicationDatabase : RoomDatabase() {
+ abstract class ApplicationDatabase : RoomDatabase() {
     abstract fun getProductDao(): GameCardDao
 
     abstract fun getScoreDao(): ScoreDao

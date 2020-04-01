@@ -16,7 +16,7 @@ import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
 
 
-internal class GameOverDialog(
+ class GameOverDialog(
     context: Context,
     private val moves: Int,
     private val time: String
@@ -75,7 +75,7 @@ internal class GameOverDialog(
         this.onGameOverSuccessDialogEventListener = onGameOverDialogEventListener
     }
 
-    internal interface OnGameOverDialogEventListener {
+     interface OnGameOverDialogEventListener {
         fun onRestart()
 
         fun onScores()

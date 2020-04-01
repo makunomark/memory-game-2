@@ -13,7 +13,7 @@ import com.wajahatkarim3.easyflipview.EasyFlipView
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-internal class GameViewModel
+class GameViewModel
 @Inject constructor(
     private val productRepository: ProductRepository
 ) : ViewModel() {
@@ -75,7 +75,7 @@ internal class GameViewModel
         val mutableProductList = gameCards.toMutableList()
         mutableProductList.addAll(gameCards)
         mutableProductList.shuffle()
-        return mutableProductList.toList()
+        return mutableProductList
     }
 
     fun addOneToScore() {

@@ -11,7 +11,7 @@ import com.makuno.memory.commons.bind
 import com.makuno.memory.data.local.entities.GameCard
 import com.wajahatkarim3.easyflipview.EasyFlipView
 
-internal class GameCardAdapter(
+ class GameCardAdapter(
     private val gameCards: List<GameCard>,
     private val onCardFlippedListener: OnCardFlippedListener
 ) : RecyclerView.Adapter<GameCardAdapter.ViewHolder>() {
@@ -52,7 +52,7 @@ internal class GameCardAdapter(
         holder.bind(gameCards[position], onCardFlippedListener)
     }
 
-    internal interface OnCardFlippedListener {
+     interface OnCardFlippedListener {
         fun onCardFlipped(
             gameCard: GameCard,
             easyFlipView: EasyFlipView

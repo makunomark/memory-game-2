@@ -19,7 +19,7 @@ import javax.inject.Singleton
         RemoteDataStore::class
     ]
 )
-internal interface ApplicationComponent {
+ interface ApplicationComponent {
 
     fun inject(application: GameApplication)
 

@@ -3,7 +3,7 @@ package com.makuno.memory.data.local.util
 import androidx.room.TypeConverter
 import java.util.*
 
-internal class Converters {
+ class Converters {
 
     @TypeConverter
     fun dateToTimestamp(date: Date): Long = date.time

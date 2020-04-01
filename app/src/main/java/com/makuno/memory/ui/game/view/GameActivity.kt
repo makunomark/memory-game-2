@@ -19,13 +19,13 @@ import dagger.android.AndroidInjection
 import java.util.*
 import javax.inject.Inject
 
-internal class GameActivity : AppCompatActivity() {
+ class GameActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: DaggerViewModelFactory
 
-    lateinit var gameViewModel: GameViewModel
-    lateinit var timer: Timer
+    private lateinit var gameViewModel: GameViewModel
+    private lateinit var timer: Timer
 
     private val rvCards by bind<RecyclerView>(R.id.rvCards)
     private val textViewMoves by bind<TextView>(R.id.textViewMoves)
