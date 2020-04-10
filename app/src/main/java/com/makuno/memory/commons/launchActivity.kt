@@ -7,10 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import com.makuno.memory.R
 
-/**
- * Extensions for simpler launching of Activities
- */
-
 inline fun <reified T : Any> Activity.launchActivity(
     requestCode: Int = -1,
     options: Bundle? = null,
@@ -26,19 +22,4 @@ inline fun <reified T : Any> Activity.launchActivity(
     }
 }
 
-inline fun <reified T : Any> Context.launchActivity(
-    options: Bundle? = null,
-    noinline init: Intent.() -> Unit = {}
-) {
-
-    val intent = newIntent<T>(this)
-    intent.init()
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-        startActivity(intent, options)
-    } else {
-        startActivity(intent)
-    }
-}
-
-inline fun <reified T : Any> newIntent(context: Context): Intent =
-    Intent(context, T::class.java)
+inline fun <reified T : Any> newIntent(context: Context): Intent = Intent(context, T::class.java)
