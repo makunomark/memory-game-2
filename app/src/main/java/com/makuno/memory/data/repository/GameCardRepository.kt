@@ -10,7 +10,7 @@ import com.makuno.memory.data.models.ProductsResponse
 import com.makuno.memory.data.remote.api.GameApplicationApi
 import javax.inject.Inject
 
-internal interface ProductRepository {
+interface ProductRepository {
 
     suspend fun loadRemoteProducts(): ProductsResponse
 
@@ -25,7 +25,7 @@ internal interface ProductRepository {
     suspend fun getHighestScoreCombination(): Score
 }
 
-internal class ProductRepositoryImpl
+class ProductRepositoryImpl
 @Inject constructor(
     private val gameApplicationApi: GameApplicationApi,
     private val gameCardDao: GameCardDao,

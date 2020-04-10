@@ -1,36 +1,29 @@
 package com.makuno.memory.ui.game.view
 
 import android.os.Bundle
-import android.os.Handler
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.RecyclerView
 import com.makuno.memory.R
 import com.makuno.memory.commons.Util
-import com.makuno.memory.commons.bind
 import com.makuno.memory.data.local.entities.GameCard
 import com.makuno.memory.di.util.DaggerViewModelFactory
 import com.makuno.memory.ui.game.adapter.GameCardAdapter
+import com.makuno.memory.ui.game.util.GameCardMatchListener
 import com.makuno.memory.ui.game.viewmodel.GameViewModel
 import com.wajahatkarim3.easyflipview.EasyFlipView
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.activity_game.*
 import java.util.*
 import javax.inject.Inject
 
-internal class GameActivity : AppCompatActivity() {
+class GameActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: DaggerViewModelFactory
 
-    lateinit var gameViewModel: GameViewModel
-    lateinit var timer: Timer
-
-    private val rvCards by bind<RecyclerView>(R.id.rvCards)
-    private val textViewMoves by bind<TextView>(R.id.textViewMoves)
-    private val textViewTimeElapsed by bind<TextView>(R.id.textViewTimeElapsed)
-    private val textViewPairs by bind<TextView>(R.id.textViewPairs)
+    private lateinit var gameViewModel: GameViewModel
+    private lateinit var timer: Timer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -91,47 +84,41 @@ internal class GameActivity : AppCompatActivity() {
     private fun displayCards(list: List<GameCard>?) {
         if (list.isNullOrEmpty()) return
 
-        rvCards.adapter = GameCardAdapter(
-            list,
-            object : GameCardAdapter.OnCardFlippedListener {
-                override fun onCardFlipped(gameCard: GameCard, easyFlipView: EasyFlipView) {
-                    gameViewModel.addOneToMove()
-                    if (gameViewModel.firstGameCard == null && gameViewModel.firstEasyFlipView == null) {
-                        gameViewModel.firstGameCard = gameCard
-                        gameViewModel.firstEasyFlipView = easyFlipView
-                    } else {
-                        compareProducts(gameCard, easyFlipView)
-                    }
+        val onCardFlippedListener = object : GameCardAdapter.OnCardFlippedListener {
+            override fun onCardFlipped(gameCard: GameCard, easyFlipView: EasyFlipView) {
+                processCardFlip(gameCard, easyFlipView)
+            }
+
+            override fun onCardCantFlip() {
+                Util.playErrorSound(applicationContext)
+            }
+        }
+
+        rvCards.adapter = GameCardAdapter(list, onCardFlippedListener)
+    }
+
+    private fun processCardFlip(
+        gameCard: GameCard,
+        easyFlipView: EasyFlipView
+    ) {
+        gameViewModel.addOneToMove()
+        gameViewModel.compareCards(
+            gameCard,
+            easyFlipView,
+            object : GameCardMatchListener {
+                override fun onCardsSimilar() {
+                    Util.playSuccessSound(applicationContext)
                 }
 
-                override fun onCardCantFlip() {
-                    Util.playErrorSound(applicationContext)
+                override fun onCardsDifferent(vararg easyFlipViews: EasyFlipView?) {
+                    flipEasyViewCard(*easyFlipViews)
                 }
             })
     }
 
-    private fun compareProducts(gameCard: GameCard, easyFlipView: EasyFlipView) {
-        if (gameViewModel.firstGameCard != null && gameCard == gameViewModel.firstGameCard) {
-            gameViewModel.firstGameCard = null
-            gameViewModel.firstEasyFlipView = null
-
-            Util.playSuccessSound(applicationContext)
-            gameViewModel.addOneToScore()
-        } else if (gameViewModel.firstGameCard != null && gameCard != gameViewModel.firstGameCard) {
-            val initialFlipView = gameViewModel.firstEasyFlipView!!
-
-            gameViewModel.firstGameCard = null
-            gameViewModel.firstEasyFlipView = null
-
-            Handler().postDelayed({
-                flipEasyViewCard(initialFlipView, easyFlipView)
-            }, 1200)
-        }
-    }
-
-    private fun flipEasyViewCard(vararg easyFlipViews: EasyFlipView) {
-        for (easyFlipView: EasyFlipView in easyFlipViews) {
-            easyFlipView.flipTheView()
+    private fun flipEasyViewCard(vararg easyFlipViews: EasyFlipView?) {
+        for (easyFlipView: EasyFlipView? in easyFlipViews) {
+            easyFlipView?.flipTheView()
         }
     }
 

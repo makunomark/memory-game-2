@@ -14,7 +14,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-internal class LocalDataStore {
+ class LocalDataStore {
 
     @Singleton
     @Provides

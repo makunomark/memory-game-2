@@ -5,6 +5,4 @@ object Constants {
 
     const val BASE_URL = "https://shopicruit.myshopify.com/"
     const val SHOPIFY_PAGE = 1
-
-    const val RETRY_TIMES = 3
 }

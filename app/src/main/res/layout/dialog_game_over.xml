@@ -132,7 +132,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <nl.dionsegijn.konfetti.KonfettiView
-        android:id="@+id/kofettiView"
+        android:id="@+id/konfettiView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </FrameLayout>

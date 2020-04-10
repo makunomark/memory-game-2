@@ -6,29 +6,20 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
-import android.widget.Button
-import android.widget.TextView
 import com.makuno.memory.R
 import com.makuno.memory.commons.Util
-import com.makuno.memory.commons.bind
-import nl.dionsegijn.konfetti.KonfettiView
+import kotlinx.android.synthetic.main.dialog_game_over.*
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
 
 
-internal class GameOverDialog(
+class GameOverDialog(
     context: Context,
     private val moves: Int,
     private val time: String
 ) : Dialog(context) {
 
-    private val konfettiView by bind<KonfettiView>(R.id.kofettiView)
-    private val btnRestart by bind<Button>(R.id.btnRestart)
-    private val btnScores by bind<Button>(R.id.btnScores)
-    private val textViewTimeElapsed by bind<TextView>(R.id.textViewTimeElapsed)
-    private val textViewMoves by bind<TextView>(R.id.textViewMoves)
-
-    lateinit var onGameOverSuccessDialogEventListener: OnGameOverDialogEventListener
+    private lateinit var onGameOverSuccessDialogEventListener: OnGameOverDialogEventListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -75,7 +66,7 @@ internal class GameOverDialog(
         this.onGameOverSuccessDialogEventListener = onGameOverDialogEventListener
     }
 
-    internal interface OnGameOverDialogEventListener {
+    interface OnGameOverDialogEventListener {
         fun onRestart()
 
         fun onScores()

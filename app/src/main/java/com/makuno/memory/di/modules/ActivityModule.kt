@@ -7,7 +7,7 @@ import dagger.android.ContributesAndroidInjector
 
 
 @Module
-internal interface ActivityModule {
+ interface ActivityModule {
 
     @ActivityScope
     @ContributesAndroidInjector

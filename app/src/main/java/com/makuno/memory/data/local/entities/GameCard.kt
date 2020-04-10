@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-internal data class GameCard(
+ data class GameCard(
     @PrimaryKey @NonNull val id: Long,
     val imageSrc: String
 )
